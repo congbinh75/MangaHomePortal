@@ -5,18 +5,18 @@ interface Props {
     currentOption: string;
 }
 
-function getParentDivClassName(name: string, currentOption: string) {
-    let divClassName = "p-0.5 my-1 rounded"
+const getParentDivClassName = (name: string, currentOption: string) => {
+    let divClassName = "w-full p-0.5 my-1 rounded text-left"
     if (currentOption === name) {
         divClassName += " bg-teal-600"
     }
     else {
-        divClassName += " bg-slate-200 dark:bg-slate-900 hover:bg-teal-500"
+        divClassName += " bg-slate-200 hover:bg-slate-300 dark:bg-slate-900 dark:hover:bg-slate-800"
     }
     return divClassName
 }
 
-function getIconClassName(icon?: string) {
+const getIconClassName = (icon?: string) => {
     let iconClassName = "ml-1 mr-2"
     if (icon) {
         iconClassName += " fa-solid w-5 fa-" + icon
@@ -24,14 +24,12 @@ function getIconClassName(icon?: string) {
     return iconClassName
 }
 
-function SidebarOption(props: Props) {
+const SidebarOption = (props: Props) => {
     return (
-        <div className={getParentDivClassName(props.name, props.currentOption)}>
-            <button onClick={() => props.func(props.name)}>
-                <i className={getIconClassName(props.icon)} />
-                {props.name}
-            </button>
-        </div>
+        <button className={getParentDivClassName(props.name, props.currentOption)} onClick={() => props.func(props.name)}>
+            <i className={getIconClassName(props.icon)} />
+            {props.name}
+        </button>
     )
 }
 

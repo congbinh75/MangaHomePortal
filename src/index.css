@@ -35,3 +35,11 @@ body {
 #root {
     min-height: 100vh;
 }
+
+@media (prefers-color-scheme: dark) {
+    .theme {
+      color: #FFFFFF;
+      background-color: #170206;
+    }
+  }
+  
