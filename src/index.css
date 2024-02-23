@@ -32,6 +32,18 @@ body {
     font-family: 'Nunito', sans-serif;
 }
 
+.app {
+    --nav_logo: url("/src/assets/img/logo_lightbg.webp");
+}
+
+.app[data-theme="dark"] {
+    --nav_logo: url("/src/assets/img/logo_darkbg.webp");
+}
+
+.nav_logo {
+    content: var(--nav_logo);
+}
+
 #root {
     min-height: 100vh;
 }
@@ -41,5 +53,9 @@ body {
       color: #FFFFFF;
       background-color: #170206;
     }
-  }
-  
+}
+
+input:checked ~ .dot {
+    transform: translateX(100%);
+    background-color: #48bb78;
+}
