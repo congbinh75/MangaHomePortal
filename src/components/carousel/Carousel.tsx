@@ -1,4 +1,4 @@
-const Carousel = () => {
+function Carousel() {
     return (
        <></>
     )
