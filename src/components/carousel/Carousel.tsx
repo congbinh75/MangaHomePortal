@@ -1,6 +1,8 @@
-function Carousel() {
+const Carousel = () => {
     return (
-       <></>
+        <div>
+            
+        </div>
     )
 }
 

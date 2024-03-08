@@ -19,7 +19,7 @@ const Sidebar = (props: Props) =>  {
         }
       }, [props.isSidebarVisible]);
 
-    function onOptionChosen(name: string) {
+    const onOptionChosen = (name: string) => {
         if (currentOption === name)
         {
             return
@@ -62,7 +62,7 @@ const Sidebar = (props: Props) =>  {
         <div className={`relative h-screen flex flex-col ease-in-out duration-300 ${
             props.isSidebarVisible ? "translate-x-0 " : "-translate-x-full" }`} >
             <div className="flex-1 w-56 p-5 bg-slate-200 dark:bg-slate-900 shadow-lg overflow-y-auto max-h-screen">
-                <div className="w-full flex flex-row-reverse">
+                <div className="w-full h-fit flex flex-row-reverse">
                     <button onClick={() => props.setIsSidebarVisible(false)}>
                         <i className="fa-solid fa-x" />
                     </button>

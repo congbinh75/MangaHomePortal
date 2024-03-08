@@ -6,7 +6,7 @@ import Home from "./components/home/Home";
 const App = () => {
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [theme, setTheme] = useState(localStorage.theme ?? "light");
-  const [isSidebarVisible, setIsSidebarVisible] = useState(false);
+  const [isSidebarVisible, setIsSidebarVisible] = useState(true);
 
   useEffect(() => {
     setDarkModeOnLoad();
@@ -23,7 +23,7 @@ const App = () => {
     }
   }, [isDarkMode]);
 
-  function setDarkModeOnLoad() {
+  const setDarkModeOnLoad = () => {
     const prefersDarkMode = window.matchMedia(
       "(prefers-color-scheme: dark)"
     ).matches;

@@ -5,7 +5,11 @@ export default {
     "./src/components/**/*.{js,jsx,ts,tsx}"
   ],
   theme: {
-    extend: {},
+    extend: {
+      height: {
+        '144' : '32rem'
+      }
+    },
   },
   plugins: [],
   darkMode: 'class'
