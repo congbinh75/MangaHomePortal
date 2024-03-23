@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Listbox } from "@headlessui/react";
 
 interface Props {
@@ -7,7 +7,7 @@ interface Props {
     author: string;
     description: string;
     url: string;
-  }>;
+  }>
 }
 
 const popularDurations = [
@@ -18,10 +18,17 @@ const popularDurations = [
 ]
 
 const Billboard = (props: Props) => {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [popularDuration, setPopularDuration] = useState(popularDurations[0]);
+  const [currentIndex, setCurrentIndex] = useState(0)
+  const [popularDuration, setPopularDuration] = useState(popularDurations[0])
+
+  const delay = 5000
+
+  let sliderTimer : number | undefined = undefined
 
   const nextSlide = () => {
+    if (sliderTimer != undefined){ 
+      clearTimeout(sliderTimer) 
+    }
     setCurrentIndex(() =>
       currentIndex === props.titles.length - 1 ? 0 : currentIndex + 1
     )
@@ -33,10 +40,22 @@ const Billboard = (props: Props) => {
     )
   }
 
-  setInterval(nextSlide, 5000)
+  useEffect(() => {
+    sliderTimer = setTimeout(
+      () =>
+        setCurrentIndex((prevIndex) =>
+          prevIndex === props.titles.length - 1 ? 0 : prevIndex + 1
+        ),
+      delay
+    )
+
+    return () => {
+      clearTimeout(sliderTimer)
+    }
+  }, [currentIndex])
 
   return (
-    <div className="relative h-144 flex flex-col flex-wrap overflow-hidden">
+    <div className="relative h-[32rem] flex flex-col flex-wrap overflow-hidden">
       {props.titles.map((title, index) => (
         <div
           key={index}
@@ -50,13 +69,15 @@ const Billboard = (props: Props) => {
             alt={`Slide ${index + 1}`}
           />
           <div className="flex flex-row h-full p-10 pb-16 backdrop-blur-lg bg-white/40 dark:bg-black/40">
-            <img
+            <a href="#">
+              <img
               className="flex-none object-cover h-96"
               src={title.url}
               alt={`Image ${index + 1}`}
-            />
+              />
+            </a>
             <div className="flex flex-col flex-1 ml-5">
-              <p className="text-5xl mb-3">{title.name}</p>
+              <a href="#" className="text-5xl mb-3">{title.name}</a>
               <p className="text-lg italic mb-20">{title.author}</p>
               <p>{title.description}</p>
             </div>
@@ -67,6 +88,7 @@ const Billboard = (props: Props) => {
         <div className="flex flex-row my-auto">
           {props.titles.map((_title, index) => (
             <button
+              key={index}
               className={
                 "w-5 h-5 mr-2 rounded transform shadow dark:shadow-slate-300 " +
                 (index === currentIndex
@@ -89,7 +111,7 @@ const Billboard = (props: Props) => {
                 </Listbox.Button>
                 <Listbox.Options className="absolute max-h-60 w-full overflow-auto rounded-md py-2 shadow text-black bg-slate-50 dark:bg-slate-950 dark:text-white dark:shadow-slate-300 -translate-y-[calc(100%+50px)]">
                   {popularDurations.map((duration) => (
-                    <div className="px-2 py-1 cursor-pointer">
+                    <div key={duration.id} className="px-2 py-1 cursor-pointer">
                       <Listbox.Option key={duration.id} value={duration}>
                         <span>{duration.name}</span>
                       </Listbox.Option>
@@ -116,7 +138,7 @@ const Billboard = (props: Props) => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Billboard;
+export default Billboard

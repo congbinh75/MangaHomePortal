@@ -59,7 +59,7 @@ const Sidebar = (props: Props) =>  {
     }
 
     return (
-        <div className={`relative h-screen flex flex-col ease-in-out duration-300 ${
+        <div className={`lg:sticky fixed top-0 h-screen flex flex-col ease-in-out duration-300 z-10  ${
             props.isSidebarVisible ? "translate-x-0 " : "-translate-x-full" }`} >
             <div className="flex-1 w-56 p-5 bg-slate-200 dark:bg-slate-900 shadow-lg overflow-y-auto max-h-screen">
                 <div className="w-full h-fit flex flex-row-reverse">

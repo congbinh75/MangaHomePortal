@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import "./App.css";
 import Sidebar from "./components/sidebar/Sidebar";
-import Home from "./components/home/Home";
+import Main from "./components/main/Main";
 
 const App = () => {
   const [isDarkMode, setIsDarkMode] = useState(false);
@@ -39,24 +39,23 @@ const App = () => {
       document.documentElement.classList.remove("dark");
       localStorage.theme = "light";
     }
-  }
+  };
 
   return (
     <div
       className="app min-h-screen flex flex-row bg-slate-50 text-black dark:bg-slate-950 dark:text-white"
       data-theme={theme}
     >
-      <div className="flex-none">
-        <Sidebar
-          isDarkMode={isDarkMode}
-          setIsDarkMode={setIsDarkMode}
-          isSidebarVisible={isSidebarVisible}
-          setIsSidebarVisible={setIsSidebarVisible}
-        />
-      </div>
-      <div className="flex-1">
-        <Home isSidebarVisible={isSidebarVisible} setIsSidebarVisible={setIsSidebarVisible} />
-      </div>
+      <Sidebar
+        isDarkMode={isDarkMode}
+        setIsDarkMode={setIsDarkMode}
+        isSidebarVisible={isSidebarVisible}
+        setIsSidebarVisible={setIsSidebarVisible}
+      />
+      <Main
+        isSidebarVisible={isSidebarVisible}
+        setIsSidebarVisible={setIsSidebarVisible}
+      />
     </div>
   );
 };
